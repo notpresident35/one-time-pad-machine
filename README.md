@@ -1,4 +1,4 @@
-This is a simple software written in python design to encrypt and decrypt text
+This is a simple software written in python designed to encrypt and decrypt text
 for secure communication. It is user friendly featuring a GUI window. 
 This repository also includes various examples, prototype programs, and more.
 If you want to use the program run OTP Complete.py. All other files are mostly

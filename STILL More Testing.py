@@ -1,3 +1,5 @@
+#The finished non-GUI program. Completely functional, but not familiar
+#to a normal computer user. The Python shell is intimidating...
 from random import randint
 from time import strftime
 Alphabet = 'abcdefghijklmnopqrstuvwxyz'

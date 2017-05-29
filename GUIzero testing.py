@@ -1,3 +1,4 @@
+#Initial move from shell to GUI. 
 from guizero import App, MenuBar, TextBox
 from random import randint
 from datetime import datetime

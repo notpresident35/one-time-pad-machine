@@ -1,3 +1,5 @@
+#Initial semi-finished one time pad machine.
+#still stretching out the gui muscles
 from guizero import App, MenuBar, TextBox, PushButton
 from random import randint
 from datetime import datetime

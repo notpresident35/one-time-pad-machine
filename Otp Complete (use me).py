@@ -1,3 +1,6 @@
+#This is the main project. All the other files are old and may not work as
+#intended. Even so, this program still is a WIP, and still has a few large holes
+#in need of fixing. Feel free to try to help.
 from tkinter import *
 #import guizero
 from random import randint

@@ -27,6 +27,7 @@ def donebuttonGen():
     sheetin.pack_forget()
     lengthin.pack_forget()
     pushbutton.pack_forget()
+    wordContents.set("One Time Pad Machine")
 
 def donebuttonEncU():
     plaintext = ""
@@ -44,15 +45,16 @@ def donebuttonEncU2(plaintext3, sheet3):
     filenameEncU.insert(0, "Enter the name of the new file to save encrypted message on")
     pushbutton2.configure(command=lambda: donebuttonEncU3(plaintext3, sheet3, ciphertextz))
 
-#HeLlO tHiS iS aN eNcRyPtEd MeSsAgE
-
 def donebuttonEncU3(plaintext4, sheet4, ciphertexts):
     filename = filenameEncU.get()
     save_file(filename, ciphertexts)
     print("Sucess, encrypted file saved")
+    wordContents.set("Success, encrypted file saved")
     pushbutton2.configure(command=lambda: donebuttonEncU())
     pushbutton2.pack_forget()
     filenameEncU.pack_forget()
+    sleep(1)
+    wordContents.set("One Time Pad Machine")
 
 def donebuttonDecU():
     sheet = load_sheet(filenameDecU.get())
@@ -67,18 +69,25 @@ def donebuttonDecU2(sheet2):
     ciphertext = load_file(filename)
     plaintext = Decrypt(ciphertext, sheet2)
     print('The message reads:')
+    wordContents.set("The message reads:")
+    sleep(1)
     print('')
     print(plaintext)
-    sleep(1)
     print("Sucess")
+    wordContents.set(plaintext)
+    sleep((len(plaintext)/10)+1)
     filenameDecU.delete(0, END)
     filenameDecU.insert(0, "Type in the filename of the OTP you want to use ")
     pushbutton3.configure(command=lambda: donebuttonDecU())
     filenameDecU.pack_forget()
     pushbutton3.pack_forget()
+    wordContents.set("One Time Pad Machine")
 
 def test():
+    wordContents.set("Success!")
     print("YOUUUUUU GOT IT!")
+    sleep(1)
+    wordContents.set("One Time Pad Machine")
 
 def button():
     done = True
@@ -121,19 +130,25 @@ def Encrypt(plaintext, sheet):
         if character not in ALPHABET:
             ciphertext += character
         else:
-            #hello. If you are seeing this you either have the otp generated for this, or you are many, many years into the future. HI
             #print((ALPHABET.index(character) + int(sheet[position])) % 26)
             encrypted = (ALPHABET.index(character) + int(sheet[position])) % 26
             ciphertext += ALPHABET[encrypted]
     return ciphertext
 
 def Encrypt_file():
+    wordContents.set('Option "Encrypt from file" failed. WIP option')
     print("Encrypt file option: Sorry, but this option is currently a WIP. For now the only way to encrypt a message is to type the message in manually. (or copy-paste the message)")
-
-def Decrypt_file():
-    print("Decrypt file option: Sorry, but this option is currently a WIP. For now the only way to decrypt an encrypted message is to type the message in manually. (or copy-paste the message)")
+    sleep(1)
+    wordContents.set("One Time Pad Machine")
+    
+def Decrypt_user():
+    wordContents.set('Option "Decrypt user input" failed. WIP option')
+    print("Decrypt user option: Sorry, but this option is currently a WIP. For now the only way to decrypt an encrypted message is to use a text file.")
+    sleep(1)
+    wordContents.set("One Time Pad Machine")
 
 def Encrypt_user():
+    wordContents.set("Encrypt a message")
     print("Encrypt user option")
     #filename = input('Type in the filename of the OTP you want to use')
     filenameEncU.pack()
@@ -143,8 +158,9 @@ def Encrypt_user():
     #filename = input('What will be the name of the encrypted file? ')
     #save_file(filename, ciphertext)
     
-def Decrypt_user():
-    print("Decrypt user option")
+def Decrypt_file():
+    wordContents.set("Decrypt an encrypted message")
+    print("Decrypt file option")
     filenameDecU.pack()
     pushbutton3.pack()
 ##    filename = input('Type in the filename of the OTP you want to use ')
@@ -157,6 +173,7 @@ def Decrypt_user():
 ##    print(plaintext)
     
 def Generate():
+    wordContents.set("Generate new one time pads")
     print("Generate option")
     #sheets = int(input('How many one-time pads would you like to generate? '))
     #length = int(input('What will be your maximum message length? '))
@@ -171,12 +188,17 @@ def Generate():
     #break
     #print("done")
     
-def Exit():
-    print("Goodbye")
-    exit()
+##def Exit():
+##    print("Goodbye")
+##    exit()
 
 ##app = guizero.App()
 window = Tk()
+words = Label(window, text="")
+wordContents = StringVar()
+words["textvariable"] = wordContents
+wordContents.set("One Time Pad Machine")
+words.pack()
 sheetin = Entry(window)
 lengthin = Entry(window)
 filenameEncU = Entry(window)
@@ -190,13 +212,12 @@ pushbutton2 = Button(window, command=donebuttonEncU, text="Done")
 pushbutton3 = Button(window, command=donebuttonDecU, text="Done")
 window.title("One Time Pad")
 window.geometry("300x300")
-lbl = Label(window, text="One time pad machine")
 #ent = Entry(window)
 #btn = Button(window, command=button, text="Button")
 menubar = Menu(window)
 #encryptbar = Menu(menubar)
 menubar.add_command(label="Generate", command=Generate)
-menubar.add_command(label="Exit", command=Exit)
+menubar.add_command(label="Exit", command=window.destroy)
 encmenu = Menu(menubar, tearoff=0)
 encmenu.add_command(label="Encrypt from file", command=Encrypt_file)
 encmenu.add_command(label="Encrypt user input", command=Encrypt_user)
@@ -214,7 +235,6 @@ menubar.add_cascade(label="Decrypt", menu=decmenu)
 ##                      [ ["Generate one time pads", Generate ], ["Exit", Exit] ]
 ##                  ])
 
-lbl.pack()
 #ent.pack()
 #btn.pack()
 window.config(menu=menubar)

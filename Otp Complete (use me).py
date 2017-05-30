@@ -76,7 +76,7 @@ def donebuttonDecU2(sheet2):
     sleep(1)
     print('')
     print(plaintext)
-    print("Sucess")
+    print("Success")
     wordContents.set(plaintext)
     sleep((len(plaintext)/10)+1)
     filenameDecU.delete(0, END)

@@ -7,7 +7,7 @@ an example of a one time pad, and Example message is an encrypted messge
 that can be decrypted using Example OTP. 
 Requirements:
  * Python 3
- * Tkinter Python package (default package, if you have python you should already have this
+ * Tkinter Python package (default package, if you have python you should already have this)
 Please report any errors and bugs, and I will try to fix them. I am
 working on getting the GUI to be completely independent from the Python log,
 so I may not get back to you immediately.
